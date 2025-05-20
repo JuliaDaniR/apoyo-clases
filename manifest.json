@@ -1,6 +1,6 @@
 {
   "name": "Mi App Resumen Personal",
-  "short_name": "ResumenApp",
+  "short_name": "Tareas",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",

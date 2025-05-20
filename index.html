@@ -44,11 +44,18 @@
             placeholder="Escribí tu tarea..."
             required
           />
+          <input
+            type="url"
+            id="inputEnlacePersonal"
+            placeholder="Enlace relacionado (opcional)"
+          />
           <select id="selectEtiquetaPersonal">
             <option value="">Sin etiqueta</option>
             <option value="Estudiar">Estudiar</option>
             <option value="Clase">Clase</option>
             <option value="Entregar">Entregar</option>
+            <option value="Importante">Importante</option>
+            <option value="Urgente">Urgente</option>
           </select>
           <button type="submit">Agregar</button>
         </form>
@@ -65,9 +72,17 @@
           <textarea
             id="txtResumenPersonal"
             rows="6"
-            placeholder="Escribí acá tu resumen personal de las clases..."
+            placeholder="Escribí tu resumen... Usá guiones (-), o * para crear listas visuales."
           ></textarea>
-          <select id="materiaResumen">
+
+          <input
+            type="url"
+            id="enlaceResumen"
+            placeholder="Enlace externo (opcional)"
+            style="margin-top: 0.5rem; width: 90%"
+          />
+
+          <select id="materiaResumen" style="margin-top: 0.5rem">
             <option value="">-- Seleccioná la materia --</option>
             <option value="Modelos de Negocios">Modelos de Negocios</option>
             <option value="Gestión de Software I">Gestión de Software I</option>
@@ -84,6 +99,7 @@
             </option>
             <option value="Inglés Técnico I">Inglés Técnico I</option>
           </select>
+
           <div
             id="colorPreview"
             style="

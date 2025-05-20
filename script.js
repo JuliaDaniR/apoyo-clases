@@ -67,6 +67,18 @@ function getStorageKey() {
   return `tareas-personales-semana-${semanaClave}`;
 }
 
+function obtenerColorPorEtiqueta(etiqueta) {
+  const colores = {
+    estudiar: "#1e88e5",     // Azul
+    clase: "#8e24aa",        // Violeta
+    entregar: "#f9a825",     // Amarillo oscuro
+    importante: "#fb8c00",   // Naranja
+    urgente: "#e53935",      // Rojo fuerte
+  };
+
+  return colores[etiqueta?.toLowerCase()] || "#9e9e9e"; // Gris por defecto
+}
+
 function renderTareasPersonales() {
   ulTareasPersonales.innerHTML = "";
   const tareas = JSON.parse(localStorage.getItem(getStorageKey())) || [];
@@ -76,56 +88,75 @@ function renderTareasPersonales() {
       "<li>No tienes tareas personales para esta semana.</li>";
   } else {
     tareas.forEach((tarea, i) => {
+      const colorEtiqueta = obtenerColorPorEtiqueta(tarea.etiqueta);
+
       const li = document.createElement("li");
       li.style.display = "flex";
-      li.style.justifyContent = "space-between";
-      li.style.alignItems = "center";
-      li.style.padding = "8px 12px";
+      li.style.flexDirection = "column";
+      li.style.justifyContent = "flex-start";
+      li.style.alignItems = "flex-start";
+      li.style.padding = "12px";
       li.style.borderBottom = "1px solid #ccc";
+      li.style.borderLeft = `6px solid ${colorEtiqueta}`;
+      li.style.gap = "8px";
+      li.style.borderRadius = "6px";
 
+      // Etiqueta completada
       const etiquetaCompletada = tarea.completada
         ? `<span style="
              background-color: #4caf50;
-             color: white;
-             padding: 2px 6px;
+             color: black;
+             font-weight: 800;
+             padding: .3rem .6rem;
              border-radius: 4px;
-             font-size: 0.75rem;
-             margin-left: 10px;
+             font-size: 1rem;
              user-select: none;
            ">Completada</span>`
         : "";
 
+      // Etiqueta personalizada
       const etiquetaTexto = tarea.etiqueta
         ? `<span style="
-             background-color:rgb(243, 121, 33);
-             color: white;
-             padding: 2px 6px;
+             background-color: ${colorEtiqueta};
+             color: black;
+             font-weight: 800;
+             padding: .3rem .6rem;
              border-radius: 4px;
-             font-size: 0.75rem;
-             margin-left: 10px;
+             font-size: 1rem;
              user-select: none;
            ">${tarea.etiqueta}</span>`
         : "";
 
-      li.innerHTML = `
-        <span id="tarea-texto-${i}" style="flex:1;">
-          ${tarea.texto} ${etiquetaTexto} ${etiquetaCompletada}
-        </span>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <input id="tarea-edit-${i}" type="text" value="${
-        tarea.texto
-      }" style="display:none; width:60%; flex:1; margin-left: 12px;">
+      // Campo principal (texto de la tarea)
+      const contenidoTareaHTML = `
+        <div style="width: 100%;">
+          <div id="tarea-texto-${i}" style="margin-bottom: 1rem;">
+            <strong>${tarea.texto}</strong>
+            ${tarea.enlace ? `<br><a href="${tarea.enlace}" target="_blank" style="font-size:0.9em;">🔗 Material extra</a>` : ""}
+          </div>
+          ${etiquetaTexto} ${etiquetaCompletada}
+          <input id="tarea-edit-${i}" type="text" value="${tarea.texto}" 
+            style="display:none; width:90%; padding: 6px; font-size: 1rem; box-sizing: border-box;">
+          <input id="enlace-edit-${i}" type="text" value="${tarea.enlace || ""}" 
+            placeholder="Editar enlace (opcional)" 
+            style="display:none; width:100%; padding: 6px; font-size: 0.95rem; margin-top:4px; box-sizing: border-box;">
+        </div>
+      `;
+
+      // Botones de acciones y checkbox
+      const accionesHTML = `
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
           <button onclick="editarTareaPersonal(${i})" style="cursor:pointer;">✏️</button>
           <button id="guardar-tarea-${i}" onclick="guardarEdicionTareaPersonal(${i})" style="display:none; cursor:pointer;">💾</button>
           <button onclick="eliminarTareaPersonal(${i})" style="cursor:pointer;">🗑️</button>
           <label class="checkbox-container" title="Marcar tarea como realizada">
-          <input type="checkbox" id="check-${i}" ${
-        tarea.completada ? "checked" : ""
-      } />
+            <input type="checkbox" id="check-${i}" ${tarea.completada ? "checked" : ""}/>
             <span class="checkmark"></span>
           </label>
-        </div> `;
+        </div>
+      `;
 
+      li.innerHTML = contenidoTareaHTML + accionesHTML;
       ulTareasPersonales.appendChild(li);
 
       document.getElementById(`check-${i}`).addEventListener("change", (e) => {
@@ -135,10 +166,12 @@ function renderTareasPersonales() {
   }
 }
 
-// ✅ NUEVA forma de agregar tarea personal
+
+// ✅ Nueva forma de agregar tarea personal con etiqueta y enlace
 function agregarTareaPersonalConEtiqueta() {
   const input = document.getElementById("inputTareaPersonal");
   const selectEtiqueta = document.getElementById("selectEtiquetaPersonal");
+  const inputEnlace = document.getElementById("inputEnlacePersonal");
 
   if (!input || !selectEtiqueta) {
     console.error("Faltan elementos del DOM");
@@ -147,15 +180,17 @@ function agregarTareaPersonalConEtiqueta() {
 
   const texto = input.value.trim();
   const etiqueta = selectEtiqueta.value;
+  const enlace = inputEnlace ? inputEnlace.value.trim() : "";
 
   if (!texto) return;
 
   const tareas = JSON.parse(localStorage.getItem(getStorageKey())) || [];
-  tareas.push({ texto, etiqueta, completada: false });
+  tareas.push({ texto, etiqueta, enlace, completada: false });
   localStorage.setItem(getStorageKey(), JSON.stringify(tareas));
 
   input.value = "";
   selectEtiqueta.value = "";
+  if (inputEnlace) inputEnlace.value = "";
 
   renderTareasPersonales();
 }
@@ -186,36 +221,45 @@ function eliminarTareaPersonal(index) {
 
 function editarTareaPersonal(index) {
   const texto = document.getElementById(`tarea-texto-${index}`);
-  const input = document.getElementById(`tarea-edit-${index}`);
+  const inputTexto = document.getElementById(`tarea-edit-${index}`);
+  const inputEnlace = document.getElementById(`enlace-edit-${index}`);
   const btnGuardar = document.getElementById(`guardar-tarea-${index}`);
-  if (texto && input && btnGuardar) {
+
+  if (texto && inputTexto && inputEnlace && btnGuardar) {
     texto.style.display = "none";
-    input.style.display = "inline-block";
+    inputTexto.style.display = "inline-block";
+    inputEnlace.style.display = "inline-block";
     btnGuardar.style.display = "inline-block";
-    input.focus();
+    inputTexto.focus();
   }
 }
 
 function guardarEdicionTareaPersonal(index) {
-  const input = document.getElementById(`tarea-edit-${index}`);
-  if (!input) return;
-  const nuevoTexto = input.value.trim();
+  const inputTexto = document.getElementById(`tarea-edit-${index}`);
+  const inputEnlace = document.getElementById(`enlace-edit-${index}`);
+  if (!inputTexto || !inputEnlace) return;
+
+  const nuevoTexto = inputTexto.value.trim();
+  const nuevoEnlace = inputEnlace.value.trim();
+
   if (!nuevoTexto) return;
 
   const tareas = JSON.parse(localStorage.getItem(getStorageKey())) || [];
   tareas[index].texto = nuevoTexto;
+  tareas[index].enlace = nuevoEnlace;
 
   localStorage.setItem(getStorageKey(), JSON.stringify(tareas));
   renderTareasPersonales();
 }
 
+
 // --- Resumen personal ---
 const coloresPorMateria = {
   "Modelos de Negocios": "#ff8a65",
   "Gestión de Software I": "#9575cd",
-  Matemática: "#4fc3f7",
+  "Matemática": "#4fc3f7",
   "Análisis de Sistemas Organizacionales": "#81c784",
-  Comunicación: "#f06292",
+  "Comunicación": "#f06292",
   "Psicosociología de las Organizaciones": "#ba68c8",
   "Arquitectura de las Computadoras": "#aed581",
   "Inglés Técnico I": "#7986cb",
@@ -225,21 +269,30 @@ function getStorageKeyResumenPersonal() {
   return `resumen-personal-semana-${semanaClave}`;
 }
 
+// Convierte texto con guiones o asteriscos en listas HTML
+function formatearTextoComoLista(texto) {
+  const lineas = texto.split("\n").map(linea => linea.trim());
+  const esLista = lineas.every(linea => /^[-*●]/.test(linea));
+
+  if (esLista) {
+    return `<ul>${lineas
+      .map(linea => `<li>${linea.replace(/^[-*●]\s*/, "")}</li>`)
+      .join("")}</ul>`;
+  }
+  return texto.replace(/\n/g, "<br>");
+}
+
 function cargarResumenPersonal() {
   const contenedor = document.getElementById("resumenPersonal");
   if (!contenedor) return;
-
   contenedor.innerHTML = "";
 
   let entradas = [];
   try {
-    entradas = JSON.parse(
-      localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
-    );
+    entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
   } catch (e) {
     console.error("Error al parsear JSON del resumen personal:", e);
     localStorage.removeItem(getStorageKeyResumenPersonal());
-    entradas = [];
   }
 
   if (entradas.length === 0) {
@@ -254,27 +307,22 @@ function cargarResumenPersonal() {
     div.style.marginBottom = "10px";
     div.style.padding = "10px";
 
+    const textoFormateado = formatearTextoComoLista(entrada.texto);
+
     div.innerHTML = `
       <p><strong>📌 ${entrada.fecha}</strong></p>
       ${
         entrada.materia
-          ? `<span style="background:${entrada.color}; color:white; padding:2px 6px; border-radius:6px; font-size:0.9rem;">
+          ? `<span style="background:${entrada.color}; color:black; font-weight:bold; padding: .5rem; border-radius:6px; border: 2px solid black;margin: 1rem .5rem; font-size:0.9rem;">
               ${entrada.materia}
             </span>`
           : ""
       }
-      <p id="texto-${entrada.id}" style="margin-top: 0.5rem;">${
-      entrada.texto
-    }</p>
-      <textarea id="edit-${
-        entrada.id
-      }" style="display:none; width:90%; background:#333; color:white; margin: 1rem auto;">${
-      entrada.texto
-    }</textarea>
+      <div id="texto-${entrada.id}" style="margin-top: 0.5rem;">${textoFormateado}</div>
+      ${entrada.enlace ? `<p><a href="${entrada.enlace}" target="_blank">🔗 Enlace relacionado</a></p>` : ""}
+      <textarea id="edit-${entrada.id}" style="display:none; width:90%; background:#333; color:white; margin: 1rem auto;">${entrada.texto}</textarea>
       <button onclick="editarEntrada('${entrada.id}')">✏️ Editar</button>
-      <button id="guardar-${entrada.id}" onclick="guardarEdicion('${
-      entrada.id
-    }')" style="display:none;">💾 Guardar</button>
+      <button id="guardar-${entrada.id}" onclick="guardarEdicion('${entrada.id}')" style="display:none;">💾 Guardar</button>
       <button onclick="eliminarEntrada('${entrada.id}')">🗑️ Eliminar</button>
     `;
 
@@ -282,19 +330,20 @@ function cargarResumenPersonal() {
   });
 }
 
-// Mostrar color al seleccionar materia
 const materiaSelect = document.getElementById("materiaResumen");
 const colorPreview = document.getElementById("colorPreview");
-
 materiaSelect?.addEventListener("change", () => {
   const materia = materiaSelect.value;
   const color = coloresPorMateria[materia] || "#ccc";
   colorPreview.style.backgroundColor = color;
 });
 
-// Guardar nuevo resumen personal
 btnGuardarResumen?.addEventListener("click", () => {
-  const textoNuevo = textareaResumenPersonal.value.trim();
+  const textareaResumen = document.getElementById("txtResumenPersonal");
+  const enlaceResumen = document.getElementById("enlaceResumen");
+  const textoNuevo = textareaResumen.value.trim();
+  const enlace = enlaceResumen.value.trim();
+
   if (!textoNuevo) return;
 
   const materiaSeleccionada = materiaSelect?.value || "Sin materia";
@@ -306,9 +355,7 @@ btnGuardarResumen?.addEventListener("click", () => {
   const año = fechaHoy.getFullYear();
   const fechaFormateada = `${dia}/${mes}/${año}`;
 
-  const entradas = JSON.parse(
-    localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
-  );
+  const entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
 
   const nuevaEntrada = {
     id: Date.now().toString(),
@@ -316,30 +363,20 @@ btnGuardarResumen?.addEventListener("click", () => {
     texto: textoNuevo,
     materia: materiaSeleccionada,
     color: colorAsociado,
+    enlace: enlace || null,
   };
 
   entradas.push(nuevaEntrada);
-  localStorage.setItem(
-    getStorageKeyResumenPersonal(),
-    JSON.stringify(entradas)
-  );
+  localStorage.setItem(getStorageKeyResumenPersonal(), JSON.stringify(entradas));
 
-  textareaResumenPersonal.value = "";
+  textareaResumen.value = "";
+  enlaceResumen.value = "";
   materiaSelect.value = "";
   colorPreview.style.backgroundColor = "#ccc";
 
   cargarResumenPersonal();
 });
 
-// Eliminar todos los resúmenes de la semana
-btnEliminarResumen?.addEventListener("click", () => {
-  if (confirm("¿Querés borrar tu resumen personal de esta semana?")) {
-    localStorage.removeItem(getStorageKeyResumenPersonal());
-    cargarResumenPersonal();
-  }
-});
-
-// Editar entrada existente
 function editarEntrada(id) {
   const texto = document.getElementById(`texto-${id}`);
   const textarea = document.getElementById(`edit-${id}`);
@@ -352,7 +389,6 @@ function editarEntrada(id) {
   }
 }
 
-// Guardar edición de entrada
 function guardarEdicion(id) {
   const textarea = document.getElementById(`edit-${id}`);
   if (!textarea) return;
@@ -360,33 +396,23 @@ function guardarEdicion(id) {
   const nuevoTexto = textarea.value.trim();
   if (!nuevoTexto) return;
 
-  const entradas = JSON.parse(
-    localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
-  );
+  const entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
   const entrada = entradas.find((e) => e.id === id);
 
   if (entrada) {
     entrada.texto = nuevoTexto;
-    localStorage.setItem(
-      getStorageKeyResumenPersonal(),
-      JSON.stringify(entradas)
-    );
+    localStorage.setItem(getStorageKeyResumenPersonal(), JSON.stringify(entradas));
     cargarResumenPersonal();
   }
 }
 
-// Eliminar una entrada individual
 function eliminarEntrada(id) {
-  let entradas = JSON.parse(
-    localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
-  );
+  let entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
   entradas = entradas.filter((e) => e.id !== id);
-  localStorage.setItem(
-    getStorageKeyResumenPersonal(),
-    JSON.stringify(entradas)
-  );
+  localStorage.setItem(getStorageKeyResumenPersonal(), JSON.stringify(entradas));
   cargarResumenPersonal();
 }
+
 
 // --- Sección Exámenes ---
 function getStorageKeyExamenes() {
@@ -538,40 +564,121 @@ function mostrarMensaje(texto) {
   }, 3000);
 }
 
-// --- Renderizado general ---
+// --- Tareas fijas ---
+// Esta función procesa la lista de tareas fijas y las organiza por día
+function procesarTareasConDia(lista) {
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+  const tareasProcesadas = [];
 
+  let diaActual = "";
+
+  for (let i = 0; i < lista.length; i++) {
+    const item = lista[i];
+    if (dias.includes(item)) {
+      diaActual = item;
+    } else {
+      tareasProcesadas.push({
+        texto: item,
+        dia: diaActual,
+      });
+    }
+  }
+
+  return tareasProcesadas;
+}
+function colorPorDia(dia) {
+  const colores = {
+    lunes: "#1976d2",       // Azul
+    martes: "#388e3c",      // Verde
+    miércoles: "#fbc02d",   // Amarillo
+    jueves: "#8e24aa",      // Violeta
+    viernes: "#fb2500",     // Rojo
+  };
+  return colores[dia?.toLowerCase()] || "#9e9e9e";
+}
+
+
+// --- Renderizado general ---
 function renderSemana() {
   const { label, weekKey } = getWeekWithOffset(offsetSemanal);
   semanaClave = weekKey;
   spanSemana.innerHTML = label;
 
-  // Render tareas fijas
-  ulTareasFijas.innerHTML = "";
-  const tareasFijas = tareasPorSemana[semanaClave] || [];
-  if (tareasFijas.length === 0) {
-    ulTareasFijas.innerHTML =
-      "<li>No hay tareas fijadas para esta semana.</li>";
-  } else {
-    tareasFijas.forEach((tarea) => {
-      const li = document.createElement("li");
-      li.textContent = tarea;
-      ulTareasFijas.appendChild(li);
-    });
-  }
+ // Render tareas fijas
+ulTareasFijas.innerHTML = "";
+
+const tareasCrudas = tareasPorSemana[semanaClave] || [];
+const tareasConDia = procesarTareasConDia(tareasCrudas);
+
+if (tareasConDia.length === 0) {
+  ulTareasFijas.innerHTML =
+    "<li>No hay tareas fijadas para esta semana.</li>";
+} else {
+  tareasConDia.forEach((tarea) => {
+    const li = document.createElement("li");
+    li.style.display = "flex";
+    li.style.flexDirection = "column";
+    li.style.alignItems = "flex-start";
+    li.style.gap = "4px";
+    li.style.padding = "10px";
+    li.style.borderBottom = "1px solid #ccc";
+
+    // Etiqueta visual del día
+    const spanDia = document.createElement("span");
+    spanDia.textContent = tarea.dia;
+    spanDia.style.backgroundColor = colorPorDia(tarea.dia);
+    spanDia.style.color = "white";
+    spanDia.style.fontWeight = "600";
+    spanDia.style.fontSize = "0.8rem";
+    spanDia.style.padding = "0.3rem 0.6rem";
+    spanDia.style.borderRadius = "4px";
+
+    // Texto de la tarea
+    const spanTexto = document.createElement("span");
+    spanTexto.innerHTML = `<strong>${tarea.texto}</strong>`;
+
+    li.appendChild(spanDia);
+    li.appendChild(spanTexto);
+    ulTareasFijas.appendChild(li);
+  });
+}
 
   // Render resumen clases oficiales
-  resumenClasesDiv.innerHTML = "";
-  const resumenSemana = resumenClasesPorSemana[semanaClave] || {};
-  if (Object.keys(resumenSemana).length === 0) {
-    resumenClasesDiv.textContent = "No hay resumen de clases para esta semana.";
-  } else {
-    for (const materia in resumenSemana) {
-      const divMat = document.createElement("div");
-      divMat.className = "materia";
-      divMat.innerHTML = `<strong class="materia-strong">${materia}</strong>${resumenSemana[materia]}`;
-      resumenClasesDiv.appendChild(divMat);
-    }
+resumenClasesDiv.innerHTML = "";
+const resumenSemana = resumenClasesPorSemana[semanaClave] || {};
+
+if (Object.keys(resumenSemana).length === 0) {
+  resumenClasesDiv.textContent = "No hay resumen de clases para esta semana.";
+} else {
+  for (const materia in resumenSemana) {
+    const datosMateria = resumenSemana[materia];
+    const divMat = document.createElement("div");
+    divMat.className = "materia";
+    divMat.style.marginBottom = "1rem";
+    divMat.style.border = "1px solid #ddd";
+    divMat.style.padding = "1rem";
+    divMat.style.borderRadius = "8px";
+
+    // Lista de temas con íconos
+    const listaTemas = datosMateria.temas
+      .map((tema) => `<li>📘 ${tema}</li>`)
+      .join("");
+
+    // Enlace si existe
+    const enlaceHTML = datosMateria.enlace
+      ? `<a href="${datosMateria.enlace}" target="_blank" style="color: #007BFF;">🔗 Ver material adicional</a>`
+      : `<em style="color: #999;">Sin material externo</em>`;
+
+    // Render HTML
+    divMat.innerHTML = `
+      <strong class="materia-strong" style="font-size: 1.1rem;">${materia}</strong>
+      <ul style="padding-left: 20px; margin-top: 0.5rem;">${listaTemas}</ul>
+      <div style="margin-top: 0.5rem;">${enlaceHTML}</div>
+    `;
+
+    resumenClasesDiv.appendChild(divMat);
   }
+}
 
   // Cargar resumen personal
   cargarResumenPersonal();
