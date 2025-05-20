@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="icons/icon-512.png"
+      type="image/png"
+      sizes="512x512"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-512.png"
+      type="image/png"
+      sizes="512x512"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0d47a1" />
+    <title>Planificador Tareas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>📚 Planificador Tareas</h1>
+      <div class="semana-nav">
+        <button id="semana-anterior">⏪</button>
+        <span id="semana-actual">📅 Semana actual</span>
+        <button id="semana-siguiente">⏩</button>
+      </div>
+      <button id="modo-toggle" class="modo-btn">🌞</button>
+    </header>
+    <main>
+      <section>
+        <h2>Tareas fijadas</h2>
+        <ul id="tareas-fijas"></ul>
+      </section>
+      <section>
+        <h2>Mis tareas personales</h2>
+        <form id="form-personal">
+          <input
+            type="text"
+            id="inputTareaPersonal"
+            placeholder="Escribí tu tarea..."
+            required
+          />
+          <select id="selectEtiquetaPersonal">
+            <option value="">Sin etiqueta</option>
+            <option value="Estudiar">Estudiar</option>
+            <option value="Clase">Clase</option>
+            <option value="Entregar">Entregar</option>
+          </select>
+          <button type="submit">Agregar</button>
+        </form>
+
+        <ul id="tareas-personales"></ul>
+      </section>
+
+      <section>
+        <h2>Resumen de clases por materia</h2>
+        <div id="resumen-clases"></div>
+        <hr />
+        <div id="resumen-clases-personal">
+          <h2>Agregar nuevo resumen personal</h2>
+          <textarea
+            id="txtResumenPersonal"
+            rows="6"
+            placeholder="Escribí acá tu resumen personal de las clases..."
+          ></textarea>
+          <select id="materiaResumen">
+            <option value="">-- Seleccioná la materia --</option>
+            <option value="Modelos de Negocios">Modelos de Negocios</option>
+            <option value="Gestión de Software I">Gestión de Software I</option>
+            <option value="Matemática">Matemática</option>
+            <option value="Análisis de Sistemas Organizacionales">
+              Análisis de Sistemas Organizacionales
+            </option>
+            <option value="Comunicación">Comunicación</option>
+            <option value="Psicosociología de las Organizaciones">
+              Psicosociología de las Organizaciones
+            </option>
+            <option value="Arquitectura de las Computadoras">
+              Arquitectura de las Computadoras
+            </option>
+            <option value="Inglés Técnico I">Inglés Técnico I</option>
+          </select>
+          <div
+            id="colorPreview"
+            style="
+              display: none;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              margin-left: 10px;
+            "
+          ></div>
+
+          <br />
+          <button id="btnGuardarResumen">💾 Guardar</button>
+        </div>
+        <hr />
+        <div id="resumenPersonal">
+          <h3>Entradas guardadas</h3>
+          <!-- Acá se cargan dinámicamente las entradas desde JS -->
+        </div>
+      </section>
+      <section>
+        <h2>📘 Registro de Exámenes</h2>
+
+        <div id="formExamen">
+          <label for="examenMateria">📘 Materia</label>
+          <select id="examenMateria">
+            <option value="">-- Materia --</option>
+            <option value="Modelos de Negocios">Modelos de Negocios</option>
+            <option value="Gestión de Software I">Gestión de Software I</option>
+            <option value="Matemática">Matemática</option>
+            <option value="Análisis de Sistemas Organizacionales">
+              Análisis de Sistemas Organizacionales
+            </option>
+            <option value="Comunicación">Comunicación</option>
+            <option value="Psicosociología de las Organizaciones">
+              Psicosociología de las Organizaciones
+            </option>
+            <option value="Arquitectura de las Computadoras">
+              Arquitectura de las Computadoras
+            </option>
+            <option value="Inglés Técnico I">Inglés Técnico I</option>
+          </select>
+
+          <label for="examenFecha">📅 Fecha del Examen</label>
+          <input type="date" id="examenFecha" />
+
+          <label for="examenContenido">📚 Contenido evaluado</label>
+          <input
+            type="text"
+            id="examenContenido"
+            placeholder="Contenido evaluado"
+          />
+
+          <label for="examenNota">📝 Nota</label>
+          <input
+            type="number"
+            id="examenNota"
+            placeholder="Nota"
+            min="1"
+            max="10"
+          />
+
+          <label for="examenRecuperatorio">♻️ Fecha del Recuperatorio</label>
+          <input type="date" id="examenRecuperatorio" />
+
+          <label for="examenEstado">📌 Estado</label>
+          <select id="examenEstado">
+            <option value="">-- Estado --</option>
+            <option value="Aprobado">✅ Aprobado</option>
+            <option value="Desaprobado">❌ Desaprobado</option>
+            <option value="Pendiente">🕒 Pendiente</option>
+          </select>
+
+          <label for="examenTemas">📑 Temas a estudiar</label>
+          <textarea
+            id="examenTemas"
+            rows="2"
+            placeholder="Lista de temas importantes"
+          ></textarea>
+
+          <label for="examenMejoras">🛠️ Qué mejorar (si fue reprobado)</label>
+          <textarea
+            id="examenMejoras"
+            rows="2"
+            placeholder="Anota aspectos a mejorar para el recuperatorio"
+          ></textarea>
+
+          <button id="btnGuardarExamen">📂 Guardar Examen</button>
+        </div>
+        <div
+          id="mensajeExamen"
+          class="mensaje-exito"
+          style="display: none"
+        ></div>
+        <hr />
+
+        <div id="listaExamenes">
+          <!-- Aquí se mostrarán las tarjetas con los exámenes -->
+        </div>
+      </section>
+    </main>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

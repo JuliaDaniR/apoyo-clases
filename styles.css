@@ -1,0 +1,701 @@
+:root {
+  --bg-color: #f0f8ff;
+  --text-color: #222;
+  --header-bg: #77d8cb;
+  --header-text: white;
+  --section-bg: white;
+  --textarea-bg: #f9f9f9;
+  --textarea-text: #222;
+  --btn-bg: #43a8ab;
+  --btn-bg-hover: #2c6865;
+    /* Colores por materia */
+  --color-modelos: #ff8a65;
+  --color-gestion: #9575cd;
+  --color-matematica: #4fc3f7;
+  --color-analisis: #81c784;
+  --color-comunicacion: #f06292;
+  --color-psicosociologia: #ba68c8;
+  --color-arquitectura: #aed581;
+  --color-ingles: #7986cb;
+}
+
+[data-modo="dark"] {
+  --bg-color: #121212;
+  --text-color: #eee;
+  --header-bg: #1b5b5e;
+  --header-text: #eee;
+  --section-bg: #222;
+  --textarea-bg: #333;
+  --textarea-text: #eee;
+  --btn-bg: #2e787d;
+  --btn-bg-hover: #1b5e55;
+
+  --color-modelos: #ff7043;
+  --color-gestion: #7e57c2;
+  --color-matematica: #29b6f6;
+  --color-analisis: #66bb6a;
+  --color-comunicacion: #ec407a;
+  --color-psicosociologia: #ab47bc;
+  --color-arquitectura: #dce775;
+  --color-ingles: #5c6bc0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+}
+
+section {
+  margin-top: 20px;
+  background: var(--section-bg);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, color 0.3s, box-shadow 0.4s;
+}
+
+h1 {
+  color: var(--header-text);
+  font-size: 2.5rem;
+  font-weight: 800;
+  transition: color 0.3s;
+}
+
+h2 {
+  color: var(--btn-bg);
+  font-size: 2rem;
+  font-weight: 800;
+  transition: color 0.3s;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  transition: gap 0.3s;
+}
+
+input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: var(--textarea-bg);
+  color: var(--textarea-text);
+  transition: border 0.3s, background 0.3s, color 0.3s;
+}
+input:focus {
+  border-color: var(--btn-bg);
+}
+
+button {
+  background: var(--btn-bg);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: var(--btn-bg-hover);
+  transform: translateY(-2px) scale(1.05);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 6px 8px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+ul li:hover {
+  background: var(--btn-bg);
+  color: #fff;
+  padding-left: 16px;
+}
+
+.semana-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+  transition: gap 0.3s;
+}
+
+.semana-nav button {
+  background-color: var(--btn-bg);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.semana-nav button:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.08);
+}
+
+.modo-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 1.3em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--header-text);
+  user-select: none;
+  transition: color 0.3s, transform 0.2s;
+}
+.modo-btn:hover {
+  transform: rotate(-15deg) scale(1.1);
+}
+
+#materias-resumen {
+  margin-top: 10px;
+}
+
+.materia {
+  margin-bottom: 10px;
+  transition: margin-bottom 0.3s;
+}
+.materia-strong {
+  font-weight: 800;
+  color: darkslateblue;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.materia strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+  transition: color 0.3s;
+}
+
+#resumen-clases-personal {
+  margin-top: 20px;
+}
+
+#txtResumenPersonal {
+  width: 90%;
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  background: var(--textarea-bg);
+  color: var(--textarea-text);
+  transition: border 0.3s, background 0.3s, color 0.3s;
+  margin: 1rem auto;
+}
+#txtResumenPersonal:focus {
+  border-color: var(--btn-bg);
+}
+
+/* Estilo checkbox custom */
+.checkbox-container {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  transition: box-shadow 0.3s;
+}
+
+.checkbox-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0; left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #0d47a1;
+  border-color: #0d47a1;
+  box-shadow: 0 0 6px #0d47a1aa;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  animation: checkmark-pop 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes checkmark-pop {
+  0% { transform: scale(0) rotate(45deg); opacity: 0; }
+  70% { transform: scale(1.2) rotate(45deg); opacity: 1; }
+  100% { transform: scale(1) rotate(45deg); opacity: 1; }
+}
+
+/* Sección de tareas personales */
+
+/* Formulario */
+#form-personal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: gap 0.3s;
+}
+
+#form-personal input,
+#form-personal select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  flex: 1 1 200px;
+  background-color: var(--textarea-bg);
+  color: var(--textarea-text);
+  transition: border 0.3s, background 0.3s, color 0.3s;
+}
+
+#form-personal button {
+  padding: 10px 20px;
+  background-color: var(--btn-bg);
+  color: var(--header-text);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#form-personal button:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.07);
+}
+
+/* Lista de tareas */
+#tareas-personales {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Tareas individuales */
+#tareas-personales li {
+  background-color: var(--section-bg);
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Etiquetas */
+#tareas-personales span {
+  font-size: 0.9rem;
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+
+/* Checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Botones de acción */
+#tareas-personales button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+  color: var(--text-color);
+}
+
+#tareas-personales button:hover {
+  transform: scale(1.1) rotate(-10deg);
+  color: var(--btn-bg);
+}
+
+/* Contenedor de entradas guardadas */
+#resumenPersonal {
+  margin-top: 1rem;
+}
+
+/* Cada entrada individual */
+.entrada-resumen {
+  background: var(--textarea-bg);
+  border: 1px solid #ccc;
+  border-left: 6px solid transparent; /* cambiará con la materia */
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, border-left-color 0.4s;
+  position: relative;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+.entrada-resumen:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+}
+
+/* Etiqueta materia */
+.entrada-resumen span.materia-label {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  user-select: none;
+  margin-bottom: 0.6rem;
+  transition: background 0.3s;
+}
+
+/* Textos */
+.entrada-resumen p {
+  margin: 0.4rem 0;
+  line-height: 1.4;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+/* Textarea para editar */
+.entrada-resumen textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  padding: 8px;
+  resize: vertical;
+  background-color: var(--textarea-bg);
+  color: var(--textarea-text);
+  transition: border 0.3s, background 0.3s, color 0.3s;
+}
+
+/* Botones */
+.entrada-resumen button,
+#btnGuardarResumen {
+  cursor: pointer;
+  border: none;
+  background-color: var(--btn-bg);
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 6px 14px;
+  margin-right: 8px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(67, 168, 171, 0.4);
+}
+
+.entrada-resumen button:hover,
+#btnGuardarResumen:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.08);
+}
+
+/* Botón eliminar en rojo */
+.entrada-resumen button.eliminar {
+  background-color: #e74c3c;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.entrada-resumen button.eliminar:hover {
+  background-color: #b73227;
+  transform: scale(1.08) rotate(-7deg);
+}
+
+/* Select y textarea de formulario principal */
+#materiaResumen,
+#txtResumenPersonal {
+  width: 90%;
+  margin: 0.4rem 0 1rem;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, background 0.3s, color 0.3s;
+  font-family: inherit;
+  background-color: var(--textarea-bg);
+  color: var(--textarea-text);
+}
+
+#materiaResumen:focus,
+#txtResumenPersonal:focus {
+  border-color: var(--btn-bg);
+  outline: none;
+  box-shadow: 0 0 6px rgba(67, 168, 171, 0.5);
+}
+
+/* Vista previa color junto al select */
+#colorPreview {
+  vertical-align: middle;
+  border: 1px solid #aaa;
+  transition: background-color 0.3s ease, border 0.3s;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  section {
+    padding: 1rem;
+    transition: padding 0.3s;
+  }
+  .entrada-resumen button {
+    padding: 6px 10px;
+    margin-bottom: 6px;
+  }
+  .entrada-resumen button.eliminar {
+    width: 48%;
+  }
+}
+
+/*Seccion examenes*/
+#formExamen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  background: var(--section-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+#formExamen select,
+#formExamen input,
+#formExamen textarea {
+  padding: 0.6rem;
+  font-size: 1rem;
+  background: var(--textarea-bg);
+  color: var(--textarea-text);
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  transition: border 0.3s, background 0.3s, color 0.3s;
+}
+
+#btnGuardarExamen {
+  background: var(--btn-bg);
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+#btnGuardarExamen:hover {
+  background: var(--btn-bg-hover);
+  transform: scale(1.07);
+}
+.card-examen {
+  background: var(--section-bg);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  border-left: 5px solid var(--btn-bg);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+  transition: box-shadow 0.3s, border-left-color 0.4s;
+}
+
+/* Colores por materia */
+.card-examen[data-materia="Modelos de Negocios"] { 
+  border-left-color: var(--color-modelos); 
+}
+.card-examen[data-materia="Gestión de Software I"] { 
+  border-left-color: var(--color-gestion); 
+}
+.card-examen[data-materia="Matemática"] { 
+  border-left-color: var(--color-matematica); 
+}
+.card-examen[data-materia="Análisis de Sistemas Organizacionales"] { 
+  border-left-color: var(--color-analisis); 
+}
+.card-examen[data-materia="Comunicación"] { 
+  border-left-color: var(--color-comunicacion); 
+}
+.card-examen[data-materia="Psicosociología de las Organizaciones"] { 
+  border-left-color: var(--color-psicosociologia); 
+}
+.card-examen[data-materia="Arquitectura de las Computadoras"] { 
+  border-left-color: var(--color-arquitectura); 
+}
+.card-examen[data-materia="Inglés Técnico I"] { 
+  border-left-color: var(--color-ingles); 
+}
+
+/* Título del examen toma el color de la materia */
+.card-examen[data-materia="Modelos de Negocios"] h2 { color: var(--color-modelos); }
+.card-examen[data-materia="Gestión de Software I"] h2 { color: var(--color-gestion); }
+.card-examen[data-materia="Matemática"] h2 { color: var(--color-matematica); }
+.card-examen[data-materia="Análisis de Sistemas Organizacionales"] h2 { color: var(--color-analisis); }
+.card-examen[data-materia="Comunicación"] h2 { color: var(--color-comunicacion); }
+.card-examen[data-materia="Psicosociología de las Organizaciones"] h2 { color: var(--color-psicosociologia); }
+.card-examen[data-materia="Arquitectura de las Computadoras"] h2 { color: var(--color-arquitectura); }
+.card-examen[data-materia="Inglés Técnico I"] h2 { color: var(--color-ingles); }
+
+.card-examen h2 {
+  margin-top: 0;
+  transition: color 0.3s;
+}
+
+.card-examen p {
+  margin: 0.3rem 0;
+  transition: color 0.3s;
+}
+
+.card-examen .acciones {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  transition: gap 0.3s;
+}
+
+.card-examen button {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.card-examen .editar {
+  background: #ffc107;
+  color: #000;
+  transition: background 0.3s, color 0.3s;
+}
+.card-examen .eliminar {
+  background: #e53935;
+  color: white;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+.card-examen .eliminar:hover {
+  transform: scale(1.08) rotate(-7deg);
+}
+.temas h3 {
+  font-size: 2rem;
+  text-align: center;
+  padding-bottom: .5rem;
+  border-bottom: 6px double var(--btn-bg); 
+  margin-bottom: 1rem;
+  background-clip: padding-box;
+  transition: border-bottom-color 0.3s;
+}
+.mensaje-exito {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInSuccess 0.7s forwards;
+}
+
+@keyframes fadeInSuccess {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 600px) {
+  .card-examen {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+    gap: 2rem;
+    transition: gap 0.3s;
+  }
+  .card-examen .detalles {
+    flex: 1;
+  }
+  .card-examen-header {
+    width: 70%;
+  }
+  .card-examen .temas{
+    width: 60%;
+  }
+}
