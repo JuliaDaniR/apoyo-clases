@@ -1,30 +1,27 @@
 // Data tareas fijas por semana (key = número de semana)
 const tareasPorSemana = {
-   20: [
-    "Lunes", "",
-    "Martes", "",
-    "Miércoles", "",
-    "Jueves", "",
-    "Viernes", "",
-  ],
   21: [
     "Lunes", "",
-    "Martes", "",
-    "Miércoles", "",
+    "Martes", "Gestion de Software - Realizar la primer parte del CSS del Business",
+    "Miércoles", "Ingles - Ejercicios b y c de la página 18",
+    "Miércoles", "Matemáticas - Revisar los problemas de lógica",
     "Jueves", "",
-    "Viernes", "",
+    "Viernes", "Comunicación - Leer el archivo del Classroom - Resúmen de Teorias de la comunicación",
   ],
   // Podés seguir agregando semanas
 };
 
 // Data resumen de clases por semana y materia
 const resumenClasesPorSemana = {
-  20: {
+  21: {
     "Modelos de Negocios": {
       temas: [
-      
+          "Concepto de modelo de negocio",
+          "Aspectos claves que incluye en un modelo de negocio",
+          "Modelo Canvas",
+          "Partes del modelo Canvas",
       ],
-      enlace: ""
+      enlace: "https://www.canva.com/s/templates?query=modelo+de+negocio"
     },
     "Gestión de Software I": {
       temas: [
@@ -51,7 +48,9 @@ const resumenClasesPorSemana = {
     },
     "Psicosociología de las Organizaciones": {
       temas: [
-       
+       "Finalizamos el trabajo practico de Conflicto",
+        "Comenzamos a ver el tema Negociación",
+        "Realizamos trabajo grupal sobre el tema Negociación",
       ]
     },
     "Arquitectura de las Computadoras": {
