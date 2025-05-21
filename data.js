@@ -1,12 +1,10 @@
 // Data tareas fijas por semana (key = número de semana)
 const tareasPorSemana = {
   21: [
-    "Lunes", "",
     "Martes", "Gestion de Software - Realizar la primer parte del CSS del Business",
     "Miércoles", "Ingles - Ejercicios b y c de la página 18",
     "Miércoles", "Matemáticas - Revisar los problemas de lógica",
-    "Jueves", "",
-    "Vernes", "Comunicación - Entregar el trabajo práctico sobre el texto de Spinelli",
+    "Viernes", "Comunicación - Entregar el trabajo práctico sobre el texto de Spinelli",
     "Viernes", "Comunicación - Leer el archivo del Classroom - Resúmen de Teorias de la comunicación",
   ],
   22: [
