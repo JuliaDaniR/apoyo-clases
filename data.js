@@ -41,12 +41,15 @@ const resumenClasesPorSemana = {
     },
     "Análisis de Sistemas Organizacionales": {
       temas: [
-    
-      ],
-      enlace: ""
+        "Comenamos a ver el tema Tipos de Sistemas",
+        "Realizamos un trabajo práctico grupal sobre ejemplos de software de los primeros 6 Tipos de Sistemas",
+        "TPS, OAS, KWS, MIS, DSS y IA"
+      ]
     },
     "Comunicación": {
-      temas: [      
+      temas: [    
+        "Continuamos con el tema de Teorías de la Comunicación",  
+        "Realizamos un trabajo en clase sobre cómo nos comunicamos en diferentes situaciones",
       ]
     },
     "Psicosociología de las Organizaciones": {
@@ -54,7 +57,8 @@ const resumenClasesPorSemana = {
        "Finalizamos el trabajo practico de Conflicto",
         "Comenzamos a ver el tema Negociación",
         "Realizamos trabajo grupal sobre el tema Negociación",
-      ]
+      ],
+      enlace: ""
     },
     "Arquitectura de las Computadoras": {
       temas: [
@@ -68,8 +72,7 @@ const resumenClasesPorSemana = {
        "Conversamos sobre la diferencia entre el inglés británico y el americano",
        "Realizamos ejercicios de las páginas 16, 17 y 7",
        "Revisar la lista de temas que puso la profesora en el Classroom para el examen, para consultar si hay algo que no se entendía",
-      ],
-      enlace: ""
+      ]
     }
   },
 };
