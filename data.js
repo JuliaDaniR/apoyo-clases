@@ -8,6 +8,8 @@ const tareasPorSemana = {
     "Viernes", "Comunicación - Leer el archivo del Classroom - Resúmen de Teorias de la comunicación",
   ],
   22: [
+    "Lunes", "Modelos de Negocios - Realizar el trabajo práctico en equipo sobre un modelo canvas",
+    "Lunes", "Psicosociología de las Organizaciones - Entregar el ensayo subido al Classroom",
     "Miércoles", "Matemáticas - Hacer los ejercicios de propiedades de la potencia desde el 1 al 36 de la primer página",
   ]
   // Podés seguir agregando semanas
@@ -75,4 +77,48 @@ const resumenClasesPorSemana = {
       ]
     }
   },
+  22: {
+    "Modelos de Negocios": {
+      temas: [
+        "Terminamos con las últimas partes del Modelo Canvas",
+        "Realizamos un trabajo práctico en equipo sobre un modelo canvas",
+        "Presentamos el trabajo práctico en clase",
+      ]
+    },
+    "Gestión de Software I": {
+      temas: [
+        "Comenzamos a trabajar en el nuevo trabajo practico del Bazar",
+        "trabajamos en la sala de computadoras",
+      ]
+    },
+    "Matemática": {
+      temas: [    
+      ]
+    },
+    "Análisis de Sistemas Organizacionales": {
+      temas: [
+      ]
+    },
+    "Comunicación": {
+      temas: [    
+      ]
+    },
+    "Psicosociología de las Organizaciones": {
+      temas: [
+       "Tuvimos clase virtual",
+       "Realizar el Ensayo subido al Classroom",
+      ],
+      enlace: ""
+    },
+    "Arquitectura de las Computadoras": {
+      temas: [
+       "El profesor agrego un enlace de canva para ir trabajando en equipo la linea de tiempo",
+      ]
+    },
+    "Inglés Técnico I": {
+      temas: [
+       "Revisar la lista de temas que puso la profesora en el Classroom para el examen, para consultar si hay algo que no se entendía",   
+      ]
+    }
+  }
 };
