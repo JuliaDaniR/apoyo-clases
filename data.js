@@ -88,15 +88,21 @@ const resumenClasesPorSemana = {
     "Gestión de Software I": {
       temas: [
         "Comenzamos a trabajar en el nuevo trabajo practico del Bazar",
-        "trabajamos en la sala de computadoras",
+        "Trabajamos en la sala de computadoras",
       ]
     },
     "Matemática": {
       temas: [    
+        "Continuamos con el tema de Propiedades de la potencia",
+        "Realizamos ejercicios de propiedades de la potencia (Parte II) del 37 al 49",
+        "Realzar ejercicio Unir con flechas del 50 al 54",
       ]
     },
     "Análisis de Sistemas Organizacionales": {
       temas: [
+        "Terminamos de ver los últimos 4 Tipos de Sistemas",
+        "Realizamos un trabajo práctico grupal sobre ejemplos de software de los últimos 4 Tipos de Sistemas, Web estáticas, Web con Base de Datos, Sistemas Expertos y Sistemas de escritorio",
+        "Sistema Expertos, Sistema de Soporte a Decisiones en grupo, Sistema de trabajo colaborativo asistido por computadora y Sistema de soporte para ejecutivos",
       ]
     },
     "Comunicación": {
@@ -117,7 +123,8 @@ const resumenClasesPorSemana = {
     },
     "Inglés Técnico I": {
       temas: [
-       "Revisar la lista de temas que puso la profesora en el Classroom para el examen, para consultar si hay algo que no se entendía",   
+       "Comenzamos a ver la unidad 2",
+       "Hicimos pags 1, 2 y 3 ( de esta última solo la teoría de presente simple afirmativo y negativo)"   
       ]
     }
   }
