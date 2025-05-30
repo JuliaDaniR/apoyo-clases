@@ -101,7 +101,7 @@ const resumenClasesPorSemana = {
     "Análisis de Sistemas Organizacionales": {
       temas: [
         "Terminamos de ver los últimos 4 Tipos de Sistemas",
-        "Realizamos un trabajo práctico grupal sobre ejemplos de software de los últimos 4 Tipos de Sistemas, Web estáticas, Web con Base de Datos, Sistemas Expertos y Sistemas de escritorio",
+        "Realizamos un trabajo práctico grupal sobre ejemplos de software de los últimos 4 Tipos de Sistemas, Web estáticas, Web con Base de Datos y Sistemas de escritorio",
         "Sistema Expertos, Sistema de Soporte a Decisiones en grupo, Sistema de trabajo colaborativo asistido por computadora y Sistema de soporte para ejecutivos",
       ]
     },
