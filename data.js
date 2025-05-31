@@ -107,6 +107,8 @@ const resumenClasesPorSemana = {
     },
     "Comunicación": {
       temas: [    
+        "Finalizamos el apunte de Teorías de la Comunicación",
+        "Trabajamos en grupo sobre la Teoria Funcionalista y la Teoria Crítica",
       ]
     },
     "Psicosociología de las Organizaciones": {
