@@ -11,8 +11,13 @@ const tareasPorSemana = {
     "Lunes", "Modelos de Negocios - Realizar el trabajo práctico en equipo sobre un modelo canvas",
     "Lunes", "Psicosociología de las Organizaciones - Entregar el ensayo subido al Classroom",
     "Miércoles", "Matemáticas - Hacer los ejercicios de propiedades de la potencia desde el 1 al 36 de la primer página",
-  ]
+  ],
+  23: [
+    "Lunes", "Modelos de Negocios - Entregar el trabajo práctico en equipo sobre un modelo canvas",
+    "Martes", "Arquitectura de las Computadoras - Trabajar en la línea de tiempo, ingresar al enlace e ir agregando datos para armarla",
+    "Miércoles", "Matemáticas - Realizar ejercicio Unir con flechas del 50 al 54",
   // Podés seguir agregando semanas
+  ],
 };
 
 // Data resumen de clases por semana y materia
@@ -64,7 +69,7 @@ const resumenClasesPorSemana = {
     },
     "Arquitectura de las Computadoras": {
       temas: [
-       "Reapaso de los componentes de la computadora",
+       "Repaso de los componentes de la computadora",
        "El profesor nos mostró cómo colocar componentes en la placa madre",
       ]
     },
@@ -87,7 +92,7 @@ const resumenClasesPorSemana = {
     },
     "Gestión de Software I": {
       temas: [
-        "Comenzamos a trabajar en el nuevo trabajo practico del Bazar",
+        "Comenzamos a trabajar en el nuevo trabajo práctico del Bazar",
         "Trabajamos en la sala de computadoras",
       ]
     },
@@ -95,7 +100,6 @@ const resumenClasesPorSemana = {
       temas: [    
         "Continuamos con el tema de Propiedades de la potencia",
         "Realizamos ejercicios de propiedades de la potencia (Parte II) del 37 al 49",
-        "Realzar ejercicio Unir con flechas del 50 al 54",
       ]
     },
     "Análisis de Sistemas Organizacionales": {
