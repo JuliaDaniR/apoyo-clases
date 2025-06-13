@@ -29,12 +29,9 @@ const tareasPorSemana = {
     "Matemáticas - Realizar ejercicio Unir con flechas del 50 al 54",
   ],
   24: [
-    "Lunes",
-    "Modelos de Negocios - Entregar el trabajo práctico en equipo sobre un modelo canvas Aerolineas",
-    "Martes",
-    "Gestión de Software I - Entregar el trabajo práctico del Bazar",
+    "Lunes", "Modelos de Negocios - Entregar el trabajo práctico en equipo sobre un modelo canvas Aerolineas",
+    "Martes", "Gestión de Software I - Entregar el trabajo práctico del Bazar",
   ],
-  25: [],
   26: [
     "Lunes",
     "Psicosociología de las Organizaciones - Trabajo práctico individual en clase con nota.",
