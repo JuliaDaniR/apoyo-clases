@@ -16,8 +16,10 @@ const tareasPorSemana = {
     "Lunes", "Modelos de Negocios - Entregar el trabajo práctico en equipo sobre un modelo canvas",
     "Martes", "Arquitectura de las Computadoras - Trabajar en la línea de tiempo, ingresar al enlace e ir agregando datos para armarla",
     "Miércoles", "Matemáticas - Realizar ejercicio Unir con flechas del 50 al 54",
-  // Podés seguir agregando semanas
   ],
+  24:[
+    "lunes", "Modelos de Negocios - Entregar el trabajo práctico en equipo sobre un modelo canvas Aerolineas",
+  ]
 };
 
 // Data resumen de clases por semana y materia
@@ -133,5 +135,50 @@ const resumenClasesPorSemana = {
        "Hicimos pags 1, 2 y 3 ( de esta última solo la teoría de presente simple afirmativo y negativo)"   
       ]
     }
-  }
+  },
+  23: {
+    "Modelos de Negocios": {
+      temas: [
+        "Continuamos con el llenado de la planilla del ejercicio del centro de imágenes",
+      ]
+    },
+    "Gestión de Software I": {
+      temas: [
+        "Introducción a Boostrap",
+      ]
+    },
+    "Matemática": {
+      temas: [    
+        "No hubo clase",
+      ]
+    },
+    "Análisis de Sistemas Organizacionales": {
+      temas: [
+        "Comenzamos a ver herramientas Case ejemplos, usos y tipos",
+        "Realizamos un trabajo práctico grupal sobre ejemplos de software de herramientas Case",
+        "Introducción a las metodologías ágiles",
+      ]
+    },
+    "Comunicación": {
+      temas: [    
+        "Trabajamos sobre el nuevo material del el capítulo 3: Habilidades para la comunicación oral",
+      ]
+    },
+    "Psicosociología de las Organizaciones": {
+      temas: [
+       "Terminamos trabajo en equipo sobre ",
+      ],
+      enlace: ""
+    },
+    "Arquitectura de las Computadoras": {
+      temas: [
+       "Comenzamos a trabajar con Excel",
+      ]
+    },
+    "Inglés Técnico I": {
+      temas: [
+       "No hubo clases",  
+      ]
+    }
+  },
 };
