@@ -29,7 +29,7 @@ const tareasPorSemana = {
     "Matemáticas - Realizar ejercicio Unir con flechas del 50 al 54",
   ],
   24: [
-    "lunes",
+    "Lunes",
     "Modelos de Negocios - Entregar el trabajo práctico en equipo sobre un modelo canvas Aerolineas",
     "Martes",
     "Gestión de Software I - Entregar el trabajo práctico del Bazar",
