@@ -204,7 +204,7 @@ const resumenClasesPorSemana = {
       temas: ["No hubo clases"],
     },
   },
-  26: {
+  25: {
     "Modelos de Negocios": {
       temas: [
         "No hubo clases, Feriado",
