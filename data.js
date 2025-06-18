@@ -36,7 +36,10 @@ const tareasPorSemana = {
     "Lunes",
     "Psicosociología de las Organizaciones - Trabajo práctico individual en clase con nota.",
     "Martes",
-    "Gestión de Software I - Entregar el trabajo práctico de la Batalla de Procesadores",
+    "Gestión de Software I - Entregar el trabajo práctico de la Batalla de Procesadores - Aún no se sabe la fecha de entrega",
+    "Miércoles",
+    "Matemáticas - Resolver los ejercicios de propiedades los que nos parezcan más difíciles para verlos en clase",
+    "Miércoles","Inglés Técnico I - Realizar el trabajo práctico 'My dream job' referido a la pagina 5 ejercicio 7",
   ],
   27: [
     "Lunes",
@@ -199,6 +202,49 @@ const resumenClasesPorSemana = {
     },
     "Inglés Técnico I": {
       temas: ["No hubo clases"],
+    },
+  },
+  26: {
+    "Modelos de Negocios": {
+      temas: [
+        "No hubo clases, Feriado",
+      ],
+    },
+    "Gestión de Software I": {
+      temas: [
+        "Comenzamos a trabajar en el nuevo trabajo página 'La Comercial'",
+      ],
+    },
+    Matemática: {
+      temas: [
+        "Realizamos ejercicios de propiedades de la radicación del 60 al 69",
+      ],
+    },
+    "Análisis de Sistemas Organizacionales": {
+      temas: [
+        "No hubo clases, Debemos asistir ExpoCarreras",
+      ],
+    },
+    Comunicación: {
+      temas: [
+        "No hay clases, Feriado",
+      ],
+    },
+    "Psicosociología de las Organizaciones": {
+      temas: [
+        "No hay clases, Feriado",
+      ],
+      enlace: "",
+    },
+    "Arquitectura de las Computadoras": {
+      temas: ["Trabajamos en excel, hicimos el trabajo practico 'Remito' y 'Factura' terminarlo y entregarlo"],
+    },
+    "Inglés Técnico I": {
+      temas: [
+        "Continuamos con el Present Simple",
+        "Realizamos ejercicios de la página 4, ejercicios 3B y 3C",
+        "Realizamos ejercicios de la página 5, Listenning el audio está en el Classroom",
+      ],
     },
   },
 };
