@@ -69,11 +69,11 @@ function getStorageKey() {
 
 function obtenerColorPorEtiqueta(etiqueta) {
   const colores = {
-    estudiar: "#1e88e5",     // Azul
-    clase: "#8e24aa",        // Violeta
-    entregar: "#f9a825",     // Amarillo oscuro
-    importante: "#fb8c00",   // Naranja
-    urgente: "#e53935",      // Rojo fuerte
+    estudiar: "#1e88e5", // Azul
+    clase: "#8e24aa", // Violeta
+    entregar: "#f9a825", // Amarillo oscuro
+    importante: "#fb8c00", // Naranja
+    urgente: "#e53935", // Rojo fuerte
   };
 
   return colores[etiqueta?.toLowerCase()] || "#9e9e9e"; // Gris por defecto
@@ -132,12 +132,18 @@ function renderTareasPersonales() {
         <div style="width: 100%;">
           <div id="tarea-texto-${i}" style="margin-bottom: 1rem;">
             <strong>${tarea.texto}</strong>
-            ${tarea.enlace ? `<br><a href="${tarea.enlace}" target="_blank" style="font-size:0.9em;">🔗 Material extra</a>` : ""}
+            ${
+              tarea.enlace
+                ? `<br><a href="${tarea.enlace}" target="_blank" style="font-size:0.9em;">🔗 Material extra</a>`
+                : ""
+            }
           </div>
           ${etiquetaTexto} ${etiquetaCompletada}
           <input id="tarea-edit-${i}" type="text" value="${tarea.texto}" 
             style="display:none; width:90%; padding: 6px; font-size: 1rem; box-sizing: border-box;">
-          <input id="enlace-edit-${i}" type="text" value="${tarea.enlace || ""}" 
+          <input id="enlace-edit-${i}" type="text" value="${
+        tarea.enlace || ""
+      }" 
             placeholder="Editar enlace (opcional)" 
             style="display:none; width:100%; padding: 6px; font-size: 0.95rem; margin-top:4px; box-sizing: border-box;">
         </div>
@@ -150,7 +156,9 @@ function renderTareasPersonales() {
           <button id="guardar-tarea-${i}" onclick="guardarEdicionTareaPersonal(${i})" style="display:none; cursor:pointer;">💾</button>
           <button onclick="eliminarTareaPersonal(${i})" style="cursor:pointer;">🗑️</button>
           <label class="checkbox-container" title="Marcar tarea como realizada">
-            <input type="checkbox" id="check-${i}" ${tarea.completada ? "checked" : ""}/>
+            <input type="checkbox" id="check-${i}" ${
+        tarea.completada ? "checked" : ""
+      }/>
             <span class="checkmark"></span>
           </label>
         </div>
@@ -165,7 +173,6 @@ function renderTareasPersonales() {
     });
   }
 }
-
 
 // ✅ Nueva forma de agregar tarea personal con etiqueta y enlace
 function agregarTareaPersonalConEtiqueta() {
@@ -252,14 +259,13 @@ function guardarEdicionTareaPersonal(index) {
   renderTareasPersonales();
 }
 
-
 // --- Resumen personal ---
 const coloresPorMateria = {
   "Modelos de Negocios": "#ff8a65",
   "Gestión de Software I": "#9575cd",
-  "Matemática": "#4fc3f7",
+  Matemática: "#4fc3f7",
   "Análisis de Sistemas Organizacionales": "#81c784",
-  "Comunicación": "#f06292",
+  Comunicación: "#f06292",
   "Psicosociología de las Organizaciones": "#ba68c8",
   "Arquitectura de las Computadoras": "#aed581",
   "Inglés Técnico I": "#7986cb",
@@ -271,12 +277,12 @@ function getStorageKeyResumenPersonal() {
 
 // Convierte texto con guiones o asteriscos en listas HTML
 function formatearTextoComoLista(texto) {
-  const lineas = texto.split("\n").map(linea => linea.trim());
-  const esLista = lineas.every(linea => /^[-*●]/.test(linea));
+  const lineas = texto.split("\n").map((linea) => linea.trim());
+  const esLista = lineas.every((linea) => /^[-*●]/.test(linea));
 
   if (esLista) {
     return `<ul>${lineas
-      .map(linea => `<li>${linea.replace(/^[-*●]\s*/, "")}</li>`)
+      .map((linea) => `<li>${linea.replace(/^[-*●]\s*/, "")}</li>`)
       .join("")}</ul>`;
   }
   return texto.replace(/\n/g, "<br>");
@@ -289,7 +295,9 @@ function cargarResumenPersonal() {
 
   let entradas = [];
   try {
-    entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
+    entradas = JSON.parse(
+      localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
+    );
   } catch (e) {
     console.error("Error al parsear JSON del resumen personal:", e);
     localStorage.removeItem(getStorageKeyResumenPersonal());
@@ -318,11 +326,23 @@ function cargarResumenPersonal() {
             </span>`
           : ""
       }
-      <div id="texto-${entrada.id}" style="margin-top: 0.5rem;">${textoFormateado}</div>
-      ${entrada.enlace ? `<p><a href="${entrada.enlace}" target="_blank">🔗 Enlace relacionado</a></p>` : ""}
-      <textarea id="edit-${entrada.id}" style="display:none; width:90%; background:#333; color:white; margin: 1rem auto;">${entrada.texto}</textarea>
+      <div id="texto-${
+        entrada.id
+      }" style="margin-top: 0.5rem;">${textoFormateado}</div>
+      ${
+        entrada.enlace
+          ? `<p><a href="${entrada.enlace}" target="_blank">🔗 Enlace relacionado</a></p>`
+          : ""
+      }
+      <textarea id="edit-${
+        entrada.id
+      }" style="display:none; width:90%; background:#333; color:white; margin: 1rem auto;">${
+      entrada.texto
+    }</textarea>
       <button onclick="editarEntrada('${entrada.id}')">✏️ Editar</button>
-      <button id="guardar-${entrada.id}" onclick="guardarEdicion('${entrada.id}')" style="display:none;">💾 Guardar</button>
+      <button id="guardar-${entrada.id}" onclick="guardarEdicion('${
+      entrada.id
+    }')" style="display:none;">💾 Guardar</button>
       <button onclick="eliminarEntrada('${entrada.id}')">🗑️ Eliminar</button>
     `;
 
@@ -355,7 +375,9 @@ btnGuardarResumen?.addEventListener("click", () => {
   const año = fechaHoy.getFullYear();
   const fechaFormateada = `${dia}/${mes}/${año}`;
 
-  const entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
+  const entradas = JSON.parse(
+    localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
+  );
 
   const nuevaEntrada = {
     id: Date.now().toString(),
@@ -367,7 +389,10 @@ btnGuardarResumen?.addEventListener("click", () => {
   };
 
   entradas.push(nuevaEntrada);
-  localStorage.setItem(getStorageKeyResumenPersonal(), JSON.stringify(entradas));
+  localStorage.setItem(
+    getStorageKeyResumenPersonal(),
+    JSON.stringify(entradas)
+  );
 
   textareaResumen.value = "";
   enlaceResumen.value = "";
@@ -396,25 +421,39 @@ function guardarEdicion(id) {
   const nuevoTexto = textarea.value.trim();
   if (!nuevoTexto) return;
 
-  const entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
+  const entradas = JSON.parse(
+    localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
+  );
   const entrada = entradas.find((e) => e.id === id);
 
   if (entrada) {
     entrada.texto = nuevoTexto;
-    localStorage.setItem(getStorageKeyResumenPersonal(), JSON.stringify(entradas));
+    localStorage.setItem(
+      getStorageKeyResumenPersonal(),
+      JSON.stringify(entradas)
+    );
     cargarResumenPersonal();
   }
 }
 
 function eliminarEntrada(id) {
-  let entradas = JSON.parse(localStorage.getItem(getStorageKeyResumenPersonal()) || "[]");
+  let entradas = JSON.parse(
+    localStorage.getItem(getStorageKeyResumenPersonal()) || "[]"
+  );
   entradas = entradas.filter((e) => e.id !== id);
-  localStorage.setItem(getStorageKeyResumenPersonal(), JSON.stringify(entradas));
+  localStorage.setItem(
+    getStorageKeyResumenPersonal(),
+    JSON.stringify(entradas)
+  );
   cargarResumenPersonal();
 }
 
-
 // --- Sección Exámenes ---
+function formatearFecha(fechaISO) {
+  const [año, mes, dia] = fechaISO.split("-");
+  return `${dia}/${mes}/${año}`;
+}
+
 function getStorageKeyExamenes() {
   return "registro-examenes";
 }
@@ -453,10 +492,12 @@ document.getElementById("btnGuardarExamen").addEventListener("click", () => {
     mejoras,
   };
 
-  let examenes = JSON.parse(localStorage.getItem(getStorageKeyExamenes()) || "[]");
+  let examenes = JSON.parse(
+    localStorage.getItem(getStorageKeyExamenes()) || "[]"
+  );
 
   if (idEnEdicion) {
-    examenes = examenes.map((e) => e.id === idEnEdicion ? examen : e);
+    examenes = examenes.map((e) => (e.id === idEnEdicion ? examen : e));
     mostrarMensaje("✅ Examen editado con éxito");
   } else {
     examenes.push(examen);
@@ -473,29 +514,39 @@ function cargarExamenes() {
   const contenedor = document.getElementById("listaExamenes");
   contenedor.innerHTML = "";
 
-  const examenes = JSON.parse(localStorage.getItem(getStorageKeyExamenes()) || "[]");
+  const examenes = JSON.parse(
+    localStorage.getItem(getStorageKeyExamenes()) || "[]"
+  );
 
   if (examenes.length === 0) {
     contenedor.innerHTML = "<p>No hay exámenes registrados.</p>";
     return;
   }
 
+  examenes.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+
   examenes.forEach((examen) => {
     const card = document.createElement("div");
     card.className = "card-examen";
     card.setAttribute("data-materia", examen.materia);
-
+    const fechaFormateada = formatearFecha(examen.fecha);
     card.innerHTML = `
       <div class="card-examen-header">
         <h2>${examen.materia}</h2>
-        <p><strong>📅 Fecha:</strong> ${examen.fecha}</p>
+        <p><strong>📅 Fecha:</strong> ${fechaFormateada}</p>
         <p><strong>📚 Contenido:</strong> ${examen.contenido}</p>
         <p><strong>📝 Nota:</strong> ${examen.nota || "Sin nota"}</p>
-        <p><strong>♻️ Recuperatorio:</strong> ${examen.recuperatorio || "No definido"}</p>
+        <p><strong>♻️ Recuperatorio:</strong> ${
+          examen.recuperatorio || "No definido"
+        }</p>
         <p><strong>📌 Estado:</strong> ${examen.estado}</p>
         <div class="acciones">
-          <button class="editar" onclick="editarExamen('${examen.id}')">✏️ Editar</button>
-          <button class="eliminar" onclick="eliminarExamen('${examen.id}')">🗑️ Eliminar</button>
+          <button class="editar" onclick="editarExamen('${
+            examen.id
+          }')">✏️ Editar</button>
+          <button class="eliminar" onclick="eliminarExamen('${
+            examen.id
+          }')">🗑️ Eliminar</button>
         </div>
       </div>
       <div class="temas">
@@ -512,14 +563,18 @@ function cargarExamenes() {
 function eliminarExamen(id) {
   if (!confirm("¿Seguro que querés eliminar este examen?")) return;
 
-  let examenes = JSON.parse(localStorage.getItem(getStorageKeyExamenes()) || "[]");
+  let examenes = JSON.parse(
+    localStorage.getItem(getStorageKeyExamenes()) || "[]"
+  );
   examenes = examenes.filter((examen) => examen.id !== id);
   localStorage.setItem(getStorageKeyExamenes(), JSON.stringify(examenes));
   cargarExamenes();
 }
 
 function editarExamen(id) {
-  const examenes = JSON.parse(localStorage.getItem(getStorageKeyExamenes()) || "[]");
+  const examenes = JSON.parse(
+    localStorage.getItem(getStorageKeyExamenes()) || "[]"
+  );
   const examen = examenes.find((e) => e.id === id);
   if (!examen) return;
 
@@ -535,7 +590,9 @@ function editarExamen(id) {
   document.getElementById("examenMejoras").value = examen.mejoras || "";
 
   // Scroll al formulario para mejorar UX
-  document.getElementById("formExamen").scrollIntoView({ behavior: "smooth", block: "start" });
+  document
+    .getElementById("formExamen")
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 
   // Poner foco en el primer campo
   document.getElementById("examenFecha").focus();
@@ -588,15 +645,14 @@ function procesarTareasConDia(lista) {
 }
 function colorPorDia(dia) {
   const colores = {
-    lunes: "#1976d2",       // Azul
-    martes: "#388e3c",      // Verde
-    miércoles: "#fbc02d",   // Amarillo
-    jueves: "#8e24aa",      // Violeta
-    viernes: "#fb2500",     // Rojo
+    lunes: "#1976d2", // Azul
+    martes: "#388e3c", // Verde
+    miércoles: "#fbc02d", // Amarillo
+    jueves: "#8e24aa", // Violeta
+    viernes: "#fb2500", // Rojo
   };
   return colores[dia?.toLowerCase()] || "#9e9e9e";
 }
-
 
 // --- Renderizado general ---
 function renderSemana() {
@@ -604,81 +660,81 @@ function renderSemana() {
   semanaClave = weekKey;
   spanSemana.innerHTML = label;
 
- // Render tareas fijas
-ulTareasFijas.innerHTML = "";
+  // Render tareas fijas
+  ulTareasFijas.innerHTML = "";
 
-const tareasCrudas = tareasPorSemana[semanaClave] || [];
-const tareasConDia = procesarTareasConDia(tareasCrudas);
+  const tareasCrudas = tareasPorSemana[semanaClave] || [];
+  const tareasConDia = procesarTareasConDia(tareasCrudas);
 
-if (tareasConDia.length === 0) {
-  ulTareasFijas.innerHTML =
-    "<li>No hay tareas fijadas para esta semana.</li>";
-} else {
-  tareasConDia.forEach((tarea) => {
-    const li = document.createElement("li");
-    li.style.display = "flex";
-    li.style.flexDirection = "column";
-    li.style.alignItems = "flex-start";
-    li.style.gap = "4px";
-    li.style.padding = "10px";
-    li.style.borderBottom = "1px solid #ccc";
+  if (tareasConDia.length === 0) {
+    ulTareasFijas.innerHTML =
+      "<li>No hay tareas fijadas para esta semana.</li>";
+  } else {
+    tareasConDia.forEach((tarea) => {
+      const li = document.createElement("li");
+      li.style.display = "flex";
+      li.style.flexDirection = "column";
+      li.style.alignItems = "flex-start";
+      li.style.gap = "4px";
+      li.style.padding = "10px";
+      li.style.borderBottom = "1px solid #ccc";
 
-    // Etiqueta visual del día
-    const spanDia = document.createElement("span");
-    spanDia.textContent = tarea.dia;
-    spanDia.style.backgroundColor = colorPorDia(tarea.dia);
-    spanDia.style.color = "white";
-    spanDia.style.fontWeight = "600";
-    spanDia.style.fontSize = "0.8rem";
-    spanDia.style.padding = "0.3rem 0.6rem";
-    spanDia.style.borderRadius = "4px";
+      // Etiqueta visual del día
+      const spanDia = document.createElement("span");
+      spanDia.textContent = tarea.dia;
+      spanDia.style.backgroundColor = colorPorDia(tarea.dia);
+      spanDia.style.color = "white";
+      spanDia.style.fontWeight = "600";
+      spanDia.style.fontSize = "0.8rem";
+      spanDia.style.padding = "0.3rem 0.6rem";
+      spanDia.style.borderRadius = "4px";
 
-    // Texto de la tarea
-    const spanTexto = document.createElement("span");
-    spanTexto.innerHTML = `<strong>${tarea.texto}</strong>`;
+      // Texto de la tarea
+      const spanTexto = document.createElement("span");
+      spanTexto.innerHTML = `<strong>${tarea.texto}</strong>`;
 
-    li.appendChild(spanDia);
-    li.appendChild(spanTexto);
-    ulTareasFijas.appendChild(li);
-  });
-}
+      li.appendChild(spanDia);
+      li.appendChild(spanTexto);
+      ulTareasFijas.appendChild(li);
+    });
+  }
 
   // Render resumen clases oficiales
-resumenClasesDiv.innerHTML = "";
-const resumenSemana = resumenClasesPorSemana[semanaClave] || {};
+  resumenClasesDiv.innerHTML = "";
+  const resumenSemana = resumenClasesPorSemana[semanaClave] || {};
 
-if (Object.keys(resumenSemana).length === 0) {
-  resumenClasesDiv.textContent = "No hay resumen de clases para esta semana.";
-} else {
-  for (const materia in resumenSemana) {
-    const datosMateria = resumenSemana[materia];
-    const divMat = document.createElement("div");
-    divMat.className = "materia";
-    divMat.style.marginBottom = "1rem";
-    divMat.style.border = "1px solid #ddd";
-    divMat.style.padding = "1rem";
-    divMat.style.borderRadius = "8px";
+  if (Object.keys(resumenSemana).length === 0) {
+    resumenClasesDiv.textContent = "No hay resumen de clases para esta semana.";
+  } else {
+    for (const materia in resumenSemana) {
+      const datosMateria = resumenSemana[materia];
+      const divMat = document.createElement("div");
+      divMat.className = "materia";
+      divMat.style.marginBottom = "1rem";
+      divMat.style.border = "1px solid #ddd";
+      divMat.style.padding = "1rem";
+      divMat.style.borderRadius = "8px";
 
-    // Lista de temas con íconos
-    const listaTemas = datosMateria.temas
-      .map((tema) => `<li>📘 ${tema}</li>`)
-      .join("");
+      // Lista de temas con íconos
+      const listaTemas = datosMateria.temas
+        .map((tema) => `<li>📘 ${tema}</li>`)
+        .join("");
 
-    // Enlace si existe
-    const enlaceHTML = datosMateria.enlace
-      ? `<a href="${datosMateria.enlace}" target="_blank" style="color: #007BFF;">🔗 Ver material adicional</a>`
-      : `<em style="color: #999;">Sin material externo</em>`;
+      // Enlace si existe
+      const enlaceHTML = datosMateria.enlace
+        ? `<a href="${datosMateria.enlace}" target="_blank" style="color: #007BFF;">🔗 Ver material adicional</a>`
+        : `<em style="color: #999;">Sin material externo</em>`;
 
-    // Render HTML
-    divMat.innerHTML = `
+      // Render HTML
+      divMat.innerHTML = `
       <strong class="materia-strong" style="font-size: 1.1rem;">${materia}</strong>
       <ul style="padding-left: 20px; margin-top: 0.5rem;">${listaTemas}</ul>
       <div style="margin-top: 0.5rem;">${enlaceHTML}</div>
     `;
 
-    resumenClasesDiv.appendChild(divMat);
+      resumenClasesDiv.appendChild(divMat);
+    }
   }
-}
 
   // Cargar resumen personal
   cargarResumenPersonal();
