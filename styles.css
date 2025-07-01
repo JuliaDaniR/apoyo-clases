@@ -683,19 +683,19 @@ ul li:hover {
 }
 
 .estado-pendiente {
-  border-left: 6px solid #f1c40f;
+  border-bottom: 6px solid #f1c40f;
 }
 
 .estado-aprobado {
-  border-left: 6px solid #2ecc71;
+  border-bottom: 6px solid #2ecc71;
 }
 
 .estado-desaprobado {
-  border-left: 6px solid #e74c3c;
+  border-bottom: 6px solid #e74c3c;
 }
 
 .estado-indefinido {
-  border-left: 6px solid #7f8c8d;
+  border-bottom: 6px solid #7f8c8d;
 }
 
 @keyframes fadeInSuccess {
