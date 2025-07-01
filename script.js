@@ -510,6 +510,19 @@ document.getElementById("btnGuardarExamen").addEventListener("click", () => {
   idEnEdicion = null;
 });
 
+function emojiEstado(estado) {
+  switch (estado.toLowerCase()) {
+    case "aprobado":
+      return "✅";
+    case "desaprobado":
+      return "❌";
+    case "pendiente":
+      return "⏳";
+    default:
+      return "❔";
+  }
+}
+// Cargar exámenes desde localStorage y renderizarlos
 function cargarExamenes() {
   const contenedor = document.getElementById("listaExamenes");
   contenedor.innerHTML = "";
@@ -526,8 +539,25 @@ function cargarExamenes() {
   examenes.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
   examenes.forEach((examen) => {
+    let claseEstadoCard = "";
+
+    switch (examen.estado.toLowerCase()) {
+      case "pendiente":
+        claseEstadoCard = "estado-pendiente";
+        break;
+      case "aprobado":
+        claseEstadoCard = "estado-aprobado";
+        break;
+      case "desaprobado":
+        claseEstadoCard = "estado-desaprobado";
+        break;
+      default:
+        claseEstadoCard = "estado-indefinido";
+    }
+
     const card = document.createElement("div");
     card.className = "card-examen";
+    card.classList.add(claseEstadoCard);
     card.setAttribute("data-materia", examen.materia);
     const fechaFormateada = formatearFecha(examen.fecha);
     card.innerHTML = `
@@ -539,7 +569,7 @@ function cargarExamenes() {
         <p><strong>♻️ Recuperatorio:</strong> ${
           examen.recuperatorio || "No definido"
         }</p>
-        <p><strong>📌 Estado:</strong> ${examen.estado}</p>
+        <p><strong>📌 Estado:</strong> ${emojiEstado(examen.estado)} ${examen.estado}</p>
         <div class="acciones">
           <button class="editar" onclick="editarExamen('${
             examen.id
